@@ -88,6 +88,7 @@ public class TagsEditText extends AutoCompleteTextView {
 
     private boolean mIsSpacesAllowedInTags = false;
     private boolean mIsSetTextDisabled = false;
+    private boolean mAllowToDelete = true;
 
     private List<TagSpan> mTagSpans = new ArrayList<>();
     private List<Tag> mTags = new ArrayList<>();
@@ -407,6 +408,7 @@ public class TagsEditText extends AutoCompleteTextView {
                         ResourceUtils.getDimensionPixelSize(context, R.dimen.defaultTagsPadding));
                 mTagsPaddingBottom = typedArray.getDimensionPixelSize(R.styleable.TagsEditText_tagsPaddingBottom,
                         ResourceUtils.getDimensionPixelSize(context, R.dimen.defaultTagsPadding));
+                mAllowToDelete = typedArray.getBoolean(R.styleable.TagsEditText_tagsAllowDelete, mAllowToDelete);
             } finally {
                 typedArray.recycle();
             }
@@ -554,7 +556,7 @@ public class TagsEditText extends AutoCompleteTextView {
             public void onClick(View widget) {
                 Editable editable = ((EditText) widget).getText();
                 mIsAfterTextWatcherEnabled = false;
-                removeTagSpan(editable, tagSpan, true);
+                if (mAllowToDelete) removeTagSpan(editable, tagSpan, true);
                 mIsAfterTextWatcherEnabled = true;
             }
         }, startSpan, endSpan, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
