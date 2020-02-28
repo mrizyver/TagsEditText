@@ -12,5 +12,6 @@
         <attr name="tagsPaddingRight" format="dimension"/>
         <attr name="tagsPaddingTop" format="dimension"/>
         <attr name="tagsPaddingBottom" format="dimension"/>
+        <attr name="tagsAllowDelete" format="boolean"/>
     </declare-styleable>
 </resources>
